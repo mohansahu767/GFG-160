@@ -1,0 +1,175 @@
+Program 1  
+
+Given an array of positive integers arr[], return the second largest element from the array. If the second largest element doesn't exist then return -1.
+
+Note: The second largest element should not be equal to the largest element.
+
+
+class Solution:
+    def getSecondLargest(self, arr):
+        # Code Here
+        remove_duplicate=list(set(arr))
+        remove_duplicate.sort()
+        if len(remove_duplicate)<2:
+            return -1
+        else:
+            return remove_duplicate[-2]
+           
+		   
+🏁 Final Verdict
+Approach	Time	Space	Best For
+Naive (Sort)	O(n log n)	Varies	Simplicity, small data
+Two-Pass	O(n)	Low/Medium	Balance between simplicity and performance
+One-Pass	O(n)	Low	High performance, optimized solutions
+
+//can you teach me with debug all this 3 approach for learning purpose including mine above given approach
+
+
+Absolutely! Let's walk through **all 3 approaches (Naive, Two-Pass, One-Pass)** — including your original — with a **debug-friendly explanation** in Python.
+
+We'll use the **same sample list** for all:
+
+```python
+arr = [5, 1, 3, 5, 6, 6, 4]
+Expected output: 5 (because 6 is the largest, 5 is the second largest **unique** number)
+```
+
+---
+
+## 🚦 \[1] Naive Approach (Your Code) — `O(n log n)`
+
+### ✅ Code:
+
+```python
+def getSecondLargest_naive(arr):
+    print("Original:", arr)
+    remove_duplicate = list(set(arr))     # Removes duplicates
+    print("Unique values:", remove_duplicate)
+
+    remove_duplicate.sort()               # Sorts in ascending order
+    print("Sorted:", remove_duplicate)
+
+    if len(remove_duplicate) < 2:
+        return -1
+    else:
+        return remove_duplicate[-2]       # Second last = second largest
+```
+
+### 🐞 Debug Output:
+
+```python
+getSecondLargest_naive([5, 1, 3, 5, 6, 6, 4])
+# Output:
+# Original: [5, 1, 3, 5, 6, 6, 4]
+# Unique values: [1, 3, 4, 5, 6]
+# Sorted: [1, 3, 4, 5, 6]
+# Result: 5
+```
+
+---
+
+## 🚥 \[2] Two-Pass Approach — `O(n)` but simpler logic
+
+### ✅ Idea:
+
+1. First pass to find the **maximum**
+2. Second pass to find the **largest less than max**
+
+### ✅ Code:
+
+```python
+def getSecondLargest_two_pass(arr):
+    print("Original:", arr)
+    unique = set(arr)
+    print("Unique values:", unique)
+
+    if len(unique) < 2:
+        return -1
+
+    first = max(unique)
+    print("Max value:", first)
+
+    unique.remove(first)
+    print("After removing max:", unique)
+
+    second = max(unique)
+    print("Second max:", second)
+    return second
+```
+
+### 🐞 Debug Output:
+
+```python
+getSecondLargest_two_pass([5, 1, 3, 5, 6, 6, 4])
+# Output:
+# Original: [5, 1, 3, 5, 6, 6, 4]
+# Unique values: {1, 3, 4, 5, 6}
+# Max value: 6
+# After removing max: {1, 3, 4, 5}
+# Second max: 5
+```
+
+---
+
+## 🚀 \[3] One-Pass Optimized — `O(n)` and fastest
+
+### ✅ Code:
+
+```python
+def getSecondLargest_one_pass(arr):
+    print("Original:", arr)
+    first = second = float('-inf')
+    seen = set()
+
+    for num in arr:
+        print(f"Checking: {num}")
+        if num in seen:
+            continue
+        seen.add(num)
+
+        if num > first:
+            second = first
+            first = num
+            print(f"New first: {first}, second: {second}")
+        elif first > num > second:
+            second = num
+            print(f"Updated second: {second}")
+
+    return second if second != float('-inf') else -1
+```
+"""
+if second != float('-inf'):
+        return second
+    else:
+        return -1
+"""
+
+### 🐞 Debug Output:
+
+```python
+getSecondLargest_one_pass([5, 1, 3, 5, 6, 6, 4])
+# Output:
+# Checking: 5
+# New first: 5, second: -inf
+# Checking: 1
+# Updated second: 1
+# Checking: 3
+# Updated second: 3
+# Checking: 6
+# New first: 6, second: 5
+# Result: 5
+```
+
+---
+
+## 📊 Final Summary
+
+| Approach         | Time         | Space  | Debug Simplicity | Notes                          |
+| ---------------- | ------------ | ------ | ---------------- | ------------------------------ |
+| **Naive (Sort)** | `O(n log n)` | `O(n)` | ⭐⭐⭐⭐             | Easy to write and understand   |
+| **Two-Pass**     | `O(n)`       | `O(n)` | ⭐⭐⭐⭐             | Clean logic, no tricky state   |
+| **One-Pass**     | `O(n)`       | `O(n)` | ⭐⭐⭐              | Most efficient, logic trickier |
+
+---
+
+Would you like to try modifying one yourself, or want me to give you a hands-on challenge to test your understanding?
