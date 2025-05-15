@@ -1,0 +1,86 @@
+Program 2
+
+Here's a comparison of multiple approaches to **"Move All Zeroes to End"**, along with time/space complexity, code samples, and when to use each:
+
+---
+
+## 🏁 **Final Verdict**
+
+| **Approach**                    | **Time**   | **Space** | **Best For**                                |
+| ------------------------------- | ---------- | --------- | ------------------------------------------- |
+| Naive (Sort)                    | O(n log n) | Varies    | Simplicity, very small data                 |
+| Two-Pass (Non-Zero + Zero Fill) | O(n)       | O(1)      | Simple, good performance                    |
+| One-Pass (Swap)                 | O(n)       | O(1)      | Best performance, optimal in-place solution |
+
+---
+
+### 📘 1. Naive Approach (Sort-Based) — *Not Ideal for This Problem*
+
+* **Idea**: Sort the array such that zeroes go to the end.
+* **Issue**: Doesn’t preserve the relative order of non-zero elements.
+
+```python
+def move_zeroes_naive(arr):
+    arr.sort(key=lambda x: x == 0)
+    return arr
+```
+
+> ✅ **Best For**: Learning purposes, very small arrays
+> ❌ **Downside**: Breaks original order; not a valid approach in strict interview settings.
+
+---
+
+### 🔄 2. Two-Pass (Non-Zero Collect + Zero Fill)
+
+* **Step 1**: Collect all non-zero elements at the beginning.
+* **Step 2**: Fill remaining positions with `0`.
+
+```python
+def move_zeroes_two_pass(arr):
+    pos = 0
+    for num in arr:
+        if num != 0:
+            arr[pos] = num
+            pos += 1
+    while pos < len(arr):
+        arr[pos] = 0
+        pos += 1
+    return arr
+```
+
+> ✅ **Best For**: Simplicity with good performance
+> 🧠 **Maintains order** and does everything in-place
+> 🕒 Time: O(n), 🧠 Space: O(1)
+
+---
+
+### 🚀 3. One-Pass (Swap-Based In-Place)
+
+* **Idea**: Move non-zero elements forward by swapping with zeroes.
+* Only one pass through the array, doing everything in-place.
+
+```python
+def move_zeroes_one_pass(arr):
+    pos = 0
+    for i in range(len(arr)):
+        if arr[i] != 0:
+            arr[i], arr[pos] = arr[pos], arr[i]
+            pos += 1
+    return arr
+```
+
+> ✅ **Best For**: High-performance scenarios, large arrays
+> ✅ **In-place, single-pass, order-preserving**
+> 🕒 Time: O(n), 🧠 Space: O(1)
+
+---
+
+### ✅ Summary Recommendation
+
+| **If you want...**               | **Use this**          |
+| -------------------------------- | --------------------- |
+| Simplicity for small input       | Naive (sort-based)    |
+| Clean and readable solution      | Two-Pass              |
+| Best performance for large input | One-Pass (swap-based) |
+
+Would you like all three in a runnable script for testing?
