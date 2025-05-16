@@ -83,4 +83,4 @@ def move_zeroes_one_pass(arr):
 | Clean and readable solution      | Two-Pass              |
 | Best performance for large input | One-Pass (swap-based) |
 
-Would you like all three in a runnable script for testing?
+
