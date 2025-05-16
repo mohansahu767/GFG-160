@@ -1,1 +1,50 @@
+**Reverse an Array**
+
+You are given an array of integers arr[]. Your task is to reverse the given array.
+
+Note: Modify the array in place.
+
+
+class Solution:
+    def reverseArray(self, arr):
+        """
+        Reverse the array in-place using one of three approaches.
+        Uncomment any one of the following blocks to use that approach.
+        """
+
+        # 🔁 Approach 1: Built-in reverse() method (In-place, clean, Pythonic)
+		
+        arr.reverse()
+
+        # 🔁 Approach 2: Two-pointer swap (Optimal for interviews and non-Python environments)
+		
+        left, right = 0, len(arr) - 1
+        while left < right:
+            arr[left], arr[right] = arr[right], arr[left]
+            left += 1
+            right -= 1
+			
+        # 🔁 Approach 3: Two-pointer swap  (# Using for loop instead of while)
+		
+        n = len(arr)
+        for i in range(n // 2):
+            arr[i], arr[n - 1 - i] = arr[n - 1 - i], arr[i]
+		
+
+        # 🔁 Approach 4: Slice copy (Technically not in-place due to extra list, but keeps reference)
+		
+        reverse_arr = arr[::-1]
+        for i in range(len(arr)):
+            arr[i] = reverse_arr[i]
+
+
+
+🏁 Final Verdict: Time and Space Complexity
+
+| **Approach**                    | **Time** | **Space** | **Best For**                            |
+| ------------------------------- | -------- | --------- | --------------------------------------- |
+| Built-in `arr.reverse()`        | O(n)     | O(1)      | Quick Pythonic solution                 |
+| Two-pointer swap (`while` loop) | O(n)     | O(1)      | Most optimal, suitable for interviews   |
+| Two-pointer swap (`for` loop)   | O(n)     | O(1)      | Same as above, more concise in Python   |
+| Slice + overwrite (`arr[::-1]`) | O(n)     | O(n)      | Easy to write, technically not in-place |
 
