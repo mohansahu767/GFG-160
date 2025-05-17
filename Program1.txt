@@ -22,12 +22,7 @@ Naive (Sort)	O(n log n)	Varies	Simplicity, small data
 Two-Pass	O(n)	Low/Medium	Balance between simplicity and performance
 One-Pass	O(n)	Low	High performance, optimized solutions
 
-//can you teach me with debug all this 3 approach for learning purpose including mine above given approach
 
-
-Absolutely! Let's walk through **all 3 approaches (Naive, Two-Pass, One-Pass)** — including your original — with a **debug-friendly explanation** in Python.
-
-We'll use the **same sample list** for all:
 
 ```python
 arr = [5, 1, 3, 5, 6, 6, 4]
