@@ -1,1 +1,45 @@
-Coming......
+**Rotate Array**   ----
+
+
+Given an array arr[]. Rotate the array to the left (counter-clockwise direction) by d steps, where d is a positive integer. Do the mentioned change in the array in place.
+
+Note: Consider the array as circular.
+
+
+class Solution:
+    #Function to rotate an array by d elements in counter-clockwise direction. 
+	
+	
+	# Approach 1
+	
+    def rotateArr(self, arr, d):
+        n = len(arr)
+        for i in range(d):  # Repeat d times
+            first = arr[0]
+            for j in range(n - 1):  # Shift all elements left by 1
+                arr[j] = arr[j + 1]
+            arr[n - 1] = first  # Put first element at the end
+
+
+
+
+	# Approach 2
+	
+	def rotate_array(arr, d):
+		n = len(arr)
+		d = d % n  # Handle d > n
+		if d == 0:
+			return arr
+
+		# Helper function to reverse a sublist in place
+		def reverse(start, end):
+			while start < end:
+				arr[start], arr[end] = arr[end], arr[start]
+				start += 1
+				end -= 1
+
+		reverse(0, d - 1)
+		reverse(d, n - 1)
+		reverse(0, n - 1)
+
+		return arr
